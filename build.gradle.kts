@@ -21,8 +21,8 @@ kotlin {
 
 // Configure project's dependencies
 repositories {
+    mavenLocal() // This tells Gradle to use the local Maven repository (~/.m2/repository)
     mavenCentral()
-    mavenLocal()
     // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
     intellijPlatform {
         defaultRepositories()
@@ -34,9 +34,9 @@ dependencies {
     testImplementation(libs.junit)
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
-    implementation("org.freemarker:freemarker:2.3.33")
-    implementation("org.ikasan.studio:ikasan-studio-extension:1.0.0")
-    testImplementation("org.freemarker:freemarker:2.3.33")
+    implementation("org.freemarker:freemarker:2.3.34")
+    implementation("org.ikasan.studio:ikasan-studio-ide-mediator:1.0.2")
+    testImplementation("org.freemarker:freemarker:2.3.34")
     implementation("net.sourceforge.fmpp:fmpp:0.9.16")
 
     testImplementation("org.ikasan:ikasan-test:4.0.4")
