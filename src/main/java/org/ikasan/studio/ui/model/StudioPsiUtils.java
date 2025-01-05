@@ -243,14 +243,14 @@ public class StudioPsiUtils {
 
     /**
      * Create and save a java source file
-     * @param project
-     * @param contentRoot
-     * @param packageName
-     * @param clazzName
-     * @param content
-     * @param focus
-     * @param replaceExisting
-     * @return
+     * @param project to be updated
+     * @param contentRoot for the file
+     * @param packageName for the java file
+     * @param clazzName for the java file
+     * @param content of the file that is to be created / updated
+     * @param focus if true, open this file in the IDE
+     * @param replaceExisting if false, will only allow creation of a new file if it doesn't exist, it can't overwrite an existing file.
+     * @return the reference to the PsiJavaFile
      */
     public static PsiJavaFile createJavaSourceFile(final Project project, final String contentRoot, final String packageName,
                                                    final  String clazzName, final String content, boolean focus,
@@ -319,7 +319,7 @@ public class StudioPsiUtils {
 
     /**
      * Generic method to validate and save a file to disk
-     * @param project
+     * @param project to be updated
      * @param contentRoot for this project
      * @param sourceRootDir for this file
      * @param subDir under sourceRoot
@@ -368,7 +368,7 @@ public class StudioPsiUtils {
 
     /**
      * Fail fast string comparison ignoring white space
-     * @TDOD maybe allow white space between quotes
+     * @TODO maybe allow white space between quotes
      * @param oldString to be compared
      * @param newString to be compared
      * @return true if both string are equal, ignoring any whitespace
@@ -517,9 +517,7 @@ public class StudioPsiUtils {
         if (selectedContentRoot != null) {
             VirtualFile virtualModelJson = selectedContentRoot.findFileByRelativePath(JSON_MODEL_FULL_PATH);
             if (virtualModelJson != null) {
-                ApplicationManager.getApplication().runReadAction(() -> {
-                    jsonModel.set(PsiManager.getInstance(project).findFile(virtualModelJson));
-                });
+                ApplicationManager.getApplication().runReadAction(() -> jsonModel.set(PsiManager.getInstance(project).findFile(virtualModelJson)));
             } else {
                 LOG.warn("STUDIO: Could not get virtual model.json from path " + JSON_MODEL_FULL_PATH);
             }
@@ -549,22 +547,6 @@ public class StudioPsiUtils {
             return getDirectory(PsiDirectoryFactory.getInstance(project).createDirectory(root), target);
         }
         return null;
-    }
-
-    public PsiDirectory getPsiDirectory(Project project, String subdirectoryPath) {
-        com.intellij.openapi.module.Module[] modules = ModuleManager.getInstance(project).getModules();
-        for (com.intellij.openapi.module.Module module : modules) {
-            VirtualFile[] roots = ModuleRootManager.getInstance(module).getContentRoots();
-            for (VirtualFile root : roots) {
-                // Resolve the subdirectory path relative to the content root
-                VirtualFile targetDir = root.findFileByRelativePath(subdirectoryPath);
-                if (targetDir != null && targetDir.isDirectory()) {
-                    // Convert to PsiDirectory
-                    return PsiManager.getInstance(project).findDirectory(targetDir);
-                }
-            }
-        }
-        return null; // Subdirectory not found
     }
 
     /**

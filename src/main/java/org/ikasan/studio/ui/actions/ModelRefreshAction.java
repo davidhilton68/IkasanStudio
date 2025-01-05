@@ -4,7 +4,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import org.ikasan.studio.core.model.ikasan.instance.Module;
 import org.ikasan.studio.ui.StudioUIUtils;
 import org.ikasan.studio.ui.UiContext;
-import org.ikasan.studio.ui.component.palette.PaletteTabPanel;
 import org.ikasan.studio.ui.model.StudioPsiUtils;
 
 import java.awt.event.ActionEvent;

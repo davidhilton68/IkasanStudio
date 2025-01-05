@@ -83,7 +83,7 @@ public class ExceptionResolutionPanel extends PropertiesPanel {
     /**
      * When updateTargetComponent is called, it will set the component to be exposed / edited, it will then
      * delegate update of the editor pane to this component so that we can specialise for different components.
-     * @See PropertiesPanel.updateTargetComponent
+     * {@code @See} PropertiesPanel.updateTargetComponent
      * For the given component, get all the editable properties and add them the to properties edit panel.
      */
     protected void populatePropertiesEditorPanel() {
