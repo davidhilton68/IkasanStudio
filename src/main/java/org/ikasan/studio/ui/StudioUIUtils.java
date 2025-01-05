@@ -258,17 +258,6 @@ public class StudioUIUtils {
                 .notify(UiContext.getProject(projectKey));
     }
 
-    public static void resetModelFromDisk(String projectKey) {
-        try {
-            StudioPsiUtils.generateModelInstanceFromJSON(projectKey, false);
-        } catch (StudioBuildException se) {
-            LOG.warn("STUDIO: SERIOUS ERROR: during resetModelFromDisk, reported when reading " + StudioPsiUtils.JSON_MODEL_FULL_PATH + " message: " + se.getMessage() +" trace: " + Arrays.asList(se.getStackTrace()));
-            StudioUIUtils.displayIdeaErrorMessage(projectKey, "Error: Please fix " + StudioPsiUtils.JSON_MODEL_FULL_PATH + " then use the Refresh Button");
-            // The dumb module should contain just enough to prevent the plugin from crashing
-            UiContext.setIkasanModule(projectKey, Module.getDumbModuleVersion());
-        }
-    }
-
     public static Color getLineColor() {
 //        listColors();
         return UIManager.getColor("Separator.separatorColor");
